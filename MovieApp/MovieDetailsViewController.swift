@@ -31,19 +31,56 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         buildViews()
-        
     }
     
-    private func buildLabels() {
+    private func buildImage(){
+        // Fetch and set image
+        let bounds = UIScreen.main.bounds
+        let height = bounds.height * 0.4
+        imageView = UIImageView()
+        imageView.autoSetDimensions(to: CGSize(width: bounds.width, height: height))
+        if let imageUrl = movie.imageUrl {
+            let url = URL(string: imageUrl)!
+            
+            DispatchQueue.global().async {
+                // Fetch Image Data
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        // Create Image and Update Image View
+                        self.imageView.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        view.addSubview(imageView)
+        imageView.autoPinEdge(toSuperviewEdge: .leading)
+        imageView.autoPinEdge(toSuperviewEdge: .top)
+    }
+    
+    
+    private func buildRectangle() {
+        whiteRectangle = UIView()
+        whiteRectangle.backgroundColor = .white
+        view.addSubview(whiteRectangle)
+        whiteRectangle.autoPinEdge(.top, to: .bottom, of: imageView)
+        whiteRectangle.autoPinEdge(toSuperviewEdge: .leading)
+        whiteRectangle.autoPinEdge(toSuperviewEdge: .bottom)
+        whiteRectangle.autoPinEdge(toSuperviewEdge: .trailing)
+    }
+    
+    
+    private func buildImageLabels() {
         movieRating = UILabel()
         movieName = UILabel()
         movieYear = UILabel()
         movieReleseDate = UILabel()
         movieCategories = UILabel()
         movieDuration = UILabel()
-        if let name = movie.name, let summary = movie.summary, let releaseDay = movie.releaseDate,
-           let year = movie.year, let duration = movie.duration, let rating = movie.rating,
-           let categories = movie.categories, let crewMembers = movie.crewMembers
+        
+        if let name = movie.name, let releaseDay = movie.releaseDate, let year = movie.year, let duration = movie.duration,
+            let rating = movie.rating, let categories = movie.categories
         {
             movieRating.text = String(rating)
             movieName.text = name
@@ -71,7 +108,6 @@ class MovieDetailsViewController: UIViewController {
         movieRating.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         movieRating.autoPinEdge(.top, to: .top, of: imageView, withOffset: 120)
         
-        
         let label1 = UILabel()
         label1.text = "User score"
         label1.textColor = .white
@@ -79,7 +115,6 @@ class MovieDetailsViewController: UIViewController {
         imageView.addSubview(label1)
         label1.autoPinEdge(.leading, to: .trailing, of: movieRating, withOffset: 10)
         label1.autoAlignAxis(.horizontal, toSameAxisOf: movieRating)
-        
         
         movieName.textColor = .white
         movieName.font = UIFont.boldSystemFont(ofSize: 23)
@@ -110,51 +145,10 @@ class MovieDetailsViewController: UIViewController {
         imageView.addSubview(movieDuration)
         movieDuration.autoPinEdge(.leading, to: .trailing, of: movieCategories, withOffset: 15)
         movieDuration.autoPinEdge(.top, to: .top, of: imageView, withOffset: 245)
-        
-        
     }
     
-    private func buildImage(){
-        // Fetch and set image
-        let bounds = UIScreen.main.bounds
-        let height = bounds.height * 0.4
-        imageView = UIImageView()
-        imageView.autoSetDimensions(to: CGSize(width: bounds.width, height: height))
-        if let imageUrl = movie.imageUrl {
-            let url = URL(string: imageUrl)!
-            
-            DispatchQueue.global().async {
-                // Fetch Image Data
-                if let data = try? Data(contentsOf: url) {
-                    DispatchQueue.main.async {
-                        // Create Image and Update Image View
-                        self.imageView.image = UIImage(data: data)
-                    }
-                }
-            }
-        }
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        view.addSubview(imageView)
-        imageView.autoPinEdge(toSuperviewEdge: .leading)
-        imageView.autoPinEdge(toSuperviewEdge: .top)
-    }
     
-    private func buildViews() {
-        view.backgroundColor = .white
-        
-        buildImage()
-        
-        whiteRectangle = UIView()
-        whiteRectangle.backgroundColor = .white
-        view.addSubview(whiteRectangle)
-        whiteRectangle.autoPinEdge(.top, to: .bottom, of: imageView)
-        whiteRectangle.autoPinEdge(toSuperviewEdge: .leading)
-        whiteRectangle.autoPinEdge(toSuperviewEdge: .bottom)
-        whiteRectangle.autoPinEdge(toSuperviewEdge: .trailing)
-        
-        buildLabels()
-        
+    private func buildButton() {
         let button = UIButton(type: .custom)
         imageView.addSubview(button)
         button.setImage(UIImage(systemName: "star"), for: .normal)
@@ -165,6 +159,47 @@ class MovieDetailsViewController: UIViewController {
         button.clipsToBounds = true
         button.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         button.autoPinEdge(.top, to: .top, of: imageView, withOffset: 280)
+    }
+    
+    private func buildRectangleLabels() {
+        movieSummary = UILabel()
+        
+        if let summary = movie.summary, let crewMembers = movie.crewMembers
+        {
+            movieSummary.text = summary
+        }
+        
+        var label2 = UILabel()
+        label2.textColor = UIColor(red: 0.1, green: 0.4, blue: 0.5, alpha: 1.0)
+        label2.text = "Overview"
+        label2.font = UIFont.systemFont(ofSize: 21, weight: .heavy)
+        whiteRectangle.addSubview(label2)
+        label2.autoPinEdge(.leading, to: .leading, of: whiteRectangle, withOffset: 15)
+        label2.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 30)
+        
+        movieSummary.font = UIFont.systemFont(ofSize: 15)
+        movieSummary.translatesAutoresizingMaskIntoConstraints = false
+        movieSummary.numberOfLines = 0
+        whiteRectangle.addSubview(movieSummary)
+        movieSummary.autoPinEdge(.leading, to: .leading, of: whiteRectangle, withOffset: 15)
+        movieSummary.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 70)
+        movieSummary.autoPinEdge(.trailing, to: .trailing, of: whiteRectangle, withOffset: -20)
+        
+    }
+    
+    
+    private func buildViews() {
+        view.backgroundColor = .white
+        
+        buildImage()
+        
+        buildRectangle()
+        
+        buildImageLabels()
+        
+        buildButton()
+        
+        buildRectangleLabels()
     }
 }
 
