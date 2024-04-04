@@ -19,6 +19,8 @@ class Movie {
     var rating: Double?
     var categories: [MovieCategoryModel]?
     var crewMembers: [MovieCrewMemberModel]?
+    var crewNames = [String]()
+    var crewRoles = [String]()
     
     init(movieId: Int) {
         if let movieDetails = MovieUseCase().getDetails(id: movieId) {
@@ -32,6 +34,13 @@ class Movie {
             rating = movieDetails.rating
             categories = movieDetails.categories
             crewMembers = movieDetails.crewMembers
+        }
+        
+        if let crew = crewMembers {
+            for person in crew {
+                crewNames.append(person.name)
+                crewRoles.append(person.role)
+            }
         }
     }
 }

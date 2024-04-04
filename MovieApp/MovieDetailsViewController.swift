@@ -23,6 +23,7 @@ class MovieDetailsViewController: UIViewController {
     var movieCategories: UILabel!
     var movieSummary: UILabel!
     var movieCrewMembers: UILabel!
+    var parentStack: UIStackView!
     
     var movie = Movie(movieId: 111161)
     
@@ -80,7 +81,7 @@ class MovieDetailsViewController: UIViewController {
         movieDuration = UILabel()
         
         if let name = movie.name, let releaseDay = movie.releaseDate, let year = movie.year, let duration = movie.duration,
-            let rating = movie.rating, let categories = movie.categories
+           let rating = movie.rating, let categories = movie.categories
         {
             movieRating.text = String(rating)
             movieName.text = name
@@ -161,15 +162,62 @@ class MovieDetailsViewController: UIViewController {
         button.autoPinEdge(.top, to: .top, of: imageView, withOffset: 280)
     }
     
+    private func displayCrewInfo() {
+        
+        var index = 0
+        let width = (UIScreen.main.bounds.width - 30) / 3
+        print(width)
+        var numOfRows = movie.crewNames.count / 3
+        if movie.crewNames.count % 3 != 0 {
+            numOfRows += 1
+        }
+        
+        
+        for row in 0...numOfRows - 1 {
+            let infoStackView = UIStackView()
+            infoStackView.axis = .horizontal
+            infoStackView.alignment = .center
+            infoStackView.distribution = .fillEqually
+            parentStack.addArrangedSubview(infoStackView)
+            
+            let greenRectangle = UIView()
+            let pinkRectangle = UIView()
+            let yellowRectangle = UIView()
+            var rectangleList = [greenRectangle, pinkRectangle, yellowRectangle]
+            
+            for i in 0...2 {
+                rectangleList[i].autoSetDimension(.height, toSize: 60)
+                infoStackView.addArrangedSubview(rectangleList[i])
+                
+                for j in 0...movie.crewNames.count - 1 {
+                    if j == i + 3 * row {
+                        var nameLabel = UILabel()
+                        nameLabel.text = movie.crewNames[j]
+                        nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
+                        rectangleList[i].addSubview(nameLabel)
+                        nameLabel.autoPinEdge(.top, to: .top, of: rectangleList[i], withOffset: 5)
+                        nameLabel.autoPinEdge(.left, to: .left, of: rectangleList[i])
+                        var roleLabel = UILabel()
+                        roleLabel.text = movie.crewRoles[j]
+                        roleLabel.font = UIFont.systemFont(ofSize: 15)
+                        rectangleList[i].addSubview(roleLabel)
+                        roleLabel.autoPinEdge(.top, to: .top, of: rectangleList[i], withOffset: 30)
+                        roleLabel.autoPinEdge(.left, to: .left, of: rectangleList[i])
+                    }
+                }
+            }
+        }
+    }
+    
     private func buildRectangleLabels() {
         movieSummary = UILabel()
         
-        if let summary = movie.summary, let crewMembers = movie.crewMembers
+        if let summary = movie.summary
         {
             movieSummary.text = summary
         }
         
-        var label2 = UILabel()
+        let label2 = UILabel()
         label2.textColor = UIColor(red: 0.1, green: 0.4, blue: 0.5, alpha: 1.0)
         label2.text = "Overview"
         label2.font = UIFont.systemFont(ofSize: 21, weight: .heavy)
@@ -185,6 +233,18 @@ class MovieDetailsViewController: UIViewController {
         movieSummary.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 70)
         movieSummary.autoPinEdge(.trailing, to: .trailing, of: whiteRectangle, withOffset: -20)
         
+        // this should probably be a table or collection view
+        parentStack = UIStackView()
+        whiteRectangle.addSubview(parentStack)
+        parentStack.axis = .vertical
+        parentStack.alignment = .fill
+        parentStack.distribution = .fillEqually
+        parentStack.spacing = 30
+        parentStack.autoPinEdge(.leading, to: .leading, of: whiteRectangle, withOffset: 15)
+        parentStack.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 160)
+        parentStack.autoPinEdge(.trailing, to: .trailing, of: whiteRectangle, withOffset: -15)
+        
+        displayCrewInfo()
     }
     
     
