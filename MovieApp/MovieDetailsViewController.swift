@@ -179,7 +179,7 @@ class MovieDetailsViewController: UIViewController {
             let greenRectangle = UIView()
             let pinkRectangle = UIView()
             let yellowRectangle = UIView()
-            var rectangleList = [greenRectangle, pinkRectangle, yellowRectangle]
+            let rectangleList = [greenRectangle, pinkRectangle, yellowRectangle]
             
             for i in 0...2 {
                 rectangleList[i].autoSetDimension(.height, toSize: 60)
@@ -187,13 +187,13 @@ class MovieDetailsViewController: UIViewController {
                 
                 for j in 0...movie.crewNames.count - 1 {
                     if j == i + 3 * row {
-                        var nameLabel = UILabel()
+                        let nameLabel = UILabel()
                         nameLabel.text = movie.crewNames[j]
                         nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
                         rectangleList[i].addSubview(nameLabel)
                         nameLabel.autoPinEdge(.top, to: .top, of: rectangleList[i], withOffset: 5)
                         nameLabel.autoPinEdge(.left, to: .left, of: rectangleList[i])
-                        var roleLabel = UILabel()
+                        let roleLabel = UILabel()
                         roleLabel.text = movie.crewRoles[j]
                         roleLabel.font = UIFont.systemFont(ofSize: 15)
                         rectangleList[i].addSubview(roleLabel)
