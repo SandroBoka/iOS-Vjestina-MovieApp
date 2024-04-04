@@ -104,7 +104,7 @@ class MovieDetailsViewController: UIViewController {
         }
         
         movieRating.textColor = .white
-        movieRating.font = UIFont.boldSystemFont(ofSize: 20)
+        movieRating.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         imageView.addSubview(movieRating)
         movieRating.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         movieRating.autoPinEdge(.top, to: .top, of: imageView, withOffset: 120)
@@ -112,37 +112,37 @@ class MovieDetailsViewController: UIViewController {
         let label1 = UILabel()
         label1.text = "User score"
         label1.textColor = .white
-        label1.font = UIFont.systemFont(ofSize: 18)
+        label1.font = UIFont.boldSystemFont(ofSize: 16)
         imageView.addSubview(label1)
         label1.autoPinEdge(.leading, to: .trailing, of: movieRating, withOffset: 10)
         label1.autoAlignAxis(.horizontal, toSameAxisOf: movieRating)
         
         movieName.textColor = .white
-        movieName.font = UIFont.boldSystemFont(ofSize: 23)
+        movieName.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
         imageView.addSubview(movieName)
         movieName.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         movieName.autoPinEdge(.top, to: .top, of: imageView, withOffset: 170)
         
         movieYear.textColor = .white
-        movieYear.font = UIFont.systemFont(ofSize: 23)
+        movieYear.font = UIFont.systemFont(ofSize: 22)
         imageView.addSubview(movieYear)
-        movieYear.autoPinEdge(.leading, to: .trailing, of: movieName, withOffset: 10)
+        movieYear.autoPinEdge(.leading, to: .trailing, of: movieName, withOffset: 5)
         movieYear.autoPinEdge(.top, to: .top, of: imageView, withOffset: 170)
         
         movieReleseDate.textColor = .white
-        movieReleseDate.font = UIFont.systemFont(ofSize: 17)
+        movieReleseDate.font = UIFont.systemFont(ofSize: 16)
         imageView.addSubview(movieReleseDate)
         movieReleseDate.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         movieReleseDate.autoPinEdge(.top, to: .top, of: imageView, withOffset: 220)
         
         movieCategories.textColor = .white
-        movieCategories.font = UIFont.systemFont(ofSize: 17)
+        movieCategories.font = UIFont.systemFont(ofSize: 16)
         imageView.addSubview(movieCategories)
-        movieCategories.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 14)
+        movieCategories.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         movieCategories.autoPinEdge(.top, to: .top, of: imageView, withOffset: 245)
         
         movieDuration.textColor = .white
-        movieDuration.font = UIFont.boldSystemFont(ofSize: 17)
+        movieDuration.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         imageView.addSubview(movieDuration)
         movieDuration.autoPinEdge(.leading, to: .trailing, of: movieCategories, withOffset: 15)
         movieDuration.autoPinEdge(.top, to: .top, of: imageView, withOffset: 245)
@@ -164,14 +164,10 @@ class MovieDetailsViewController: UIViewController {
     
     private func displayCrewInfo() {
         
-        var index = 0
-        let width = (UIScreen.main.bounds.width - 30) / 3
-        print(width)
         var numOfRows = movie.crewNames.count / 3
         if movie.crewNames.count % 3 != 0 {
             numOfRows += 1
         }
-        
         
         for row in 0...numOfRows - 1 {
             let infoStackView = UIStackView()
@@ -233,7 +229,6 @@ class MovieDetailsViewController: UIViewController {
         movieSummary.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 70)
         movieSummary.autoPinEdge(.trailing, to: .trailing, of: whiteRectangle, withOffset: -20)
         
-        // this should probably be a table or collection view
         parentStack = UIStackView()
         whiteRectangle.addSubview(parentStack)
         parentStack.axis = .vertical
