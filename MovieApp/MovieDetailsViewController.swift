@@ -25,7 +25,7 @@ class MovieDetailsViewController: UIViewController {
     var movieCrewMembers: UILabel!
     var parentStack: UIStackView!
     
-    var movie = Movie(movieId: 111161)
+    var movie = Movie(movieId: 110357)
     
     
     override func viewDidLoad() {
@@ -89,14 +89,7 @@ class MovieDetailsViewController: UIViewController {
             let helping = releaseDay.split(separator: "-")
             movieReleseDate.text = helping[2] + "/" + helping[1] + "/" + helping[0] + " (US)"
             
-            var helping2 = ""
-            for index in 0 ..< categories.count {
-                helping2 += (String(describing: categories[index]).capitalized)
-                if index < categories.count - 1 {
-                    helping2 += ", "
-                }
-            }
-            movieCategories.text = helping2
+            movieCategories.text = categories.map { String(describing: $0).capitalized }.joined(separator: ", ")
             
             let hours = Int(duration / 60)
             let minutes = duration % 60
@@ -122,6 +115,7 @@ class MovieDetailsViewController: UIViewController {
         imageView.addSubview(movieName)
         movieName.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 15)
         movieName.autoPinEdge(.top, to: .top, of: imageView, withOffset: 170)
+        movieName.autoPinEdge(.trailing, to: .trailing, of: imageView)
         
         movieYear.textColor = .white
         movieYear.font = UIFont.systemFont(ofSize: 22)
