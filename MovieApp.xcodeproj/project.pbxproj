@@ -17,6 +17,7 @@
 		AA894D772BB8392F00F42292 /* MovieAppData in Frameworks */ = {isa = PBXBuildFile; productRef = AA894D762BB8392F00F42292 /* MovieAppData */; };
 		AA894D7B2BB87CE500F42292 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */; };
 		AA894D7D2BB882E100F42292 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA894D7C2BB882E100F42292 /* Movie.swift */; };
+		AA8ABA3E2BE694B7001C94D3 /* MovieDetailsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8ABA3D2BE694B7001C94D3 /* MovieDetailsFooterView.swift */; };
 		AA8CF0882BBF21FC00FCCEAC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		AA894D6C2BB8385900F42292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		AA894D7C2BB882E100F42292 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		AA8ABA3D2BE694B7001C94D3 /* MovieDetailsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsFooterView.swift; sourceTree = "<group>"; };
 		AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 				AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */,
 				AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */,
 				AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */,
+				AA8ABA3D2BE694B7001C94D3 /* MovieDetailsFooterView.swift */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				AA21DC0E2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift in Sources */,
 				AA8CF0882BBF21FC00FCCEAC /* LoginViewController.swift in Sources */,
 				AA894D7B2BB87CE500F42292 /* MovieDetailsViewController.swift in Sources */,
+				AA8ABA3E2BE694B7001C94D3 /* MovieDetailsFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
