@@ -13,15 +13,9 @@ import MovieAppData
 class MovieDetailsViewController: UIViewController {
     
     var header: UIView!
+    var content: UIView!
     var whiteRectangle: UIView!
     var stackView: UIStackView!
-    var movieRating: UILabel!
-    var movieName: UILabel!
-    var movieYear: UILabel!
-    var movieReleseDate: UILabel!
-    var movieDuration: UILabel!
-    var movieCategories: UILabel!
-    var movieSummary: UILabel!
     var movieCrewMembers: UILabel!
     var parentStack: UIStackView!
     
@@ -45,7 +39,9 @@ class MovieDetailsViewController: UIViewController {
         
         buildHeader(movieStruct: movieStruct)
         
-        buildRectangle()
+        buildContent(movieStruct: movieStruct)
+        
+        buildRectangle(movieStruct: movieStruct)
         
         buildRectangleLabels(movieStruct: movieStruct)
     }
@@ -57,13 +53,22 @@ class MovieDetailsViewController: UIViewController {
         header.autoPinEdge(toSuperviewEdge: .top)
         header.autoPinEdge(toSuperviewEdge: .trailing)
     }
+    
+    
+    private func buildContent(movieStruct: Movie.MovieStruct){
+        content = MovieDetailsContentView(movieStruct: movieStruct)
+        view.addSubview(content)
+        content.autoPinEdge(.top, to: .bottom, of: header)
+        content.autoPinEdge(toSuperviewEdge: .leading)
+        content.autoPinEdge(toSuperviewEdge: .trailing)
+    }
 
     
-    private func buildRectangle() {
+    private func buildRectangle(movieStruct: Movie.MovieStruct) {
         whiteRectangle = UIView()
         whiteRectangle.backgroundColor = .white
         view.addSubview(whiteRectangle)
-        whiteRectangle.autoPinEdge(.top, to: .bottom, of: header)
+        whiteRectangle.autoPinEdge(.top, to: .bottom, of: content)
         whiteRectangle.autoPinEdge(toSuperviewEdge: .leading)
         whiteRectangle.autoPinEdge(toSuperviewEdge: .bottom)
         whiteRectangle.autoPinEdge(toSuperviewEdge: .trailing)
@@ -114,26 +119,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     private func buildRectangleLabels(movieStruct: Movie.MovieStruct) {
-        movieSummary = UILabel()
-        
-        movieSummary.text = movieStruct.summary
-
-        let label2 = UILabel()
-        label2.textColor = UIColor(red: 0.1, green: 0.4, blue: 0.5, alpha: 1.0)
-        label2.text = "Overview"
-        label2.font = UIFont.systemFont(ofSize: 21, weight: .heavy)
-        whiteRectangle.addSubview(label2)
-        label2.autoPinEdge(.leading, to: .leading, of: whiteRectangle, withOffset: 15)
-        label2.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 30)
-        
-        movieSummary.font = UIFont.systemFont(ofSize: 15)
-        movieSummary.translatesAutoresizingMaskIntoConstraints = false
-        movieSummary.numberOfLines = 0
-        whiteRectangle.addSubview(movieSummary)
-        movieSummary.autoPinEdge(.leading, to: .leading, of: whiteRectangle, withOffset: 15)
-        movieSummary.autoPinEdge(.top, to: .top, of: whiteRectangle, withOffset: 70)
-        movieSummary.autoPinEdge(.trailing, to: .trailing, of: whiteRectangle, withOffset: -20)
-        
+    
         parentStack = UIStackView()
         whiteRectangle.addSubview(parentStack)
         parentStack.axis = .vertical
