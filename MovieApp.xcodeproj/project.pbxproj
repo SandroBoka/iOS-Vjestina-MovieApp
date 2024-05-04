@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA3A79772BE6374A00D20698 /* MovieDeatilsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3A79762BE6374A00D20698 /* MovieDeatilsHeaderView.swift */; };
 		AA894D5F2BB8385800F42292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA894D5E2BB8385800F42292 /* AppDelegate.swift */; };
 		AA894D612BB8385800F42292 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA894D602BB8385800F42292 /* SceneDelegate.swift */; };
 		AA894D682BB8385900F42292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA894D672BB8385900F42292 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA3A79762BE6374A00D20698 /* MovieDeatilsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDeatilsHeaderView.swift; sourceTree = "<group>"; };
 		AA894D5B2BB8385800F42292 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA894D5E2BB8385800F42292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA894D602BB8385800F42292 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */,
 				AA894D7C2BB882E100F42292 /* Movie.swift */,
 				AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */,
+				AA3A79762BE6374A00D20698 /* MovieDeatilsHeaderView.swift */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				AA894D5F2BB8385800F42292 /* AppDelegate.swift in Sources */,
 				AA894D612BB8385800F42292 /* SceneDelegate.swift in Sources */,
 				AA894D7D2BB882E100F42292 /* Movie.swift in Sources */,
+				AA3A79772BE6374A00D20698 /* MovieDeatilsHeaderView.swift in Sources */,
 				AA8CF0882BBF21FC00FCCEAC /* LoginViewController.swift in Sources */,
 				AA894D7B2BB87CE500F42292 /* MovieDetailsViewController.swift in Sources */,
 			);
