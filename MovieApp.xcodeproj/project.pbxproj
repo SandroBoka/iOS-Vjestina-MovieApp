@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AA21DC0E2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */; };
 		AA21DC102BE65DD4008BCA25 /* MovieDetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */; };
+		AA3788692BE9082500598FC4 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3788682BE9082500598FC4 /* MovieListViewController.swift */; };
+		AA37886B2BE9103B00598FC4 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37886A2BE9103B00598FC4 /* MovieCell.swift */; };
 		AA894D5F2BB8385800F42292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA894D5E2BB8385800F42292 /* AppDelegate.swift */; };
 		AA894D612BB8385800F42292 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA894D602BB8385800F42292 /* SceneDelegate.swift */; };
 		AA894D682BB8385900F42292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA894D672BB8385900F42292 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
 		AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsContentView.swift; sourceTree = "<group>"; };
+		AA3788682BE9082500598FC4 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		AA37886A2BE9103B00598FC4 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		AA894D5B2BB8385800F42292 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA894D5E2BB8385800F42292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA894D602BB8385800F42292 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,12 +77,14 @@
 				AA894D672BB8385900F42292 /* Assets.xcassets */,
 				AA894D692BB8385900F42292 /* LaunchScreen.storyboard */,
 				AA894D6C2BB8385900F42292 /* Info.plist */,
-				AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */,
-				AA894D7C2BB882E100F42292 /* Movie.swift */,
 				AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */,
+				AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */,
+				AA3788682BE9082500598FC4 /* MovieListViewController.swift */,
 				AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */,
 				AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */,
 				AA8ABA3D2BE694B7001C94D3 /* MovieDetailsFooterView.swift */,
+				AA894D7C2BB882E100F42292 /* Movie.swift */,
+				AA37886A2BE9103B00598FC4 /* MovieCell.swift */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -167,7 +173,9 @@
 				AA21DC102BE65DD4008BCA25 /* MovieDetailsContentView.swift in Sources */,
 				AA21DC0E2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift in Sources */,
 				AA8CF0882BBF21FC00FCCEAC /* LoginViewController.swift in Sources */,
+				AA3788692BE9082500598FC4 /* MovieListViewController.swift in Sources */,
 				AA894D7B2BB87CE500F42292 /* MovieDetailsViewController.swift in Sources */,
+				AA37886B2BE9103B00598FC4 /* MovieCell.swift in Sources */,
 				AA8ABA3E2BE694B7001C94D3 /* MovieDetailsFooterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,7 +401,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fiveagency/MovieAppData";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 2.1.1;
 			};
 		};
