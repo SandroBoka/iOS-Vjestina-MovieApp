@@ -40,7 +40,7 @@ class CollectionCell: UITableViewCell {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.alwaysBounceHorizontal = true
         
-        self.addSubview(collectionView)
+        self.contentView.addSubview(collectionView)
         
         collectionView.autoPinEdgesToSuperviewEdges()
         

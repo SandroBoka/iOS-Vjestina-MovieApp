@@ -18,8 +18,8 @@ class MovieCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(movieImageView)
-        addSubview(movieInfoView)
+        contentView.addSubview(movieImageView)
+        contentView.addSubview(movieInfoView)
         
         configureImageView()
         configureInfoView()

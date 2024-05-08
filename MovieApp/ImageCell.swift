@@ -15,12 +15,13 @@ class ImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(imageView)
+        contentView.addSubview(imageView)
         
         configureImageView()
+        buildButton()
         
         self.backgroundColor = .white
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 12
     }
     
     required init?(coder: NSCoder) {
@@ -43,13 +44,32 @@ class ImageCell: UICollectionViewCell {
     }
     
     
-    func configureImageView() {
+    private func configureImageView() {
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 10
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 12
         
         imageView.autoPinEdgesToSuperviewEdges()
+    }
+    
+    private func buildButton() {
+        let emptyView = UIView()
+        imageView.addSubview(emptyView)
+        emptyView.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 5)
+        emptyView.autoPinEdge(.top, to: .top, of: imageView, withOffset: 5)
+
         
-        imageView.autoSetDimension(.height, toSize: 170)
+        emptyView.autoSetDimensions(to: CGSize(width: 40, height: 40))
+        
+        let button = UIButton(type: .custom)
+        emptyView.addSubview(button)
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.autoSetDimensions(to: CGSize(width: 30, height: 30))
+        button.tintColor = .white
+        button.backgroundColor = .darkGray
+        button.layer.opacity = 0.7
+        button.layer.cornerRadius = 17
+        button.clipsToBounds = true
+        button.autoCenterInSuperview()
     }
 }
