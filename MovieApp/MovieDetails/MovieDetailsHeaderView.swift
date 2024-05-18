@@ -36,13 +36,22 @@ class MovieDetailsHeaderView: UIView {
     private func getImage(movieStruct: Movie.MovieStruct) {
         let imageView = UIImageView()
         let url = URL(string: movieStruct.imageUrl)!
+        let cacheKey = NSString(string: movieStruct.imageUrl) // Cache key
         
-        DispatchQueue.global().async {
-            // Fetch Image Data
-            if let data = try? Data(contentsOf: url) {
-                DispatchQueue.main.async {
-                    // Create Image and Update Image View
-                    imageView.image = UIImage(data: data)
+        // Check if the image is already cached
+        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
+            imageView.image = cachedImage
+        } else {
+            // If not, download the image
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    // Cache the image
+                    ImageCache.shared.setObject(image, forKey: cacheKey)
+                    
+                    // Update the image view on the main thread
+                    DispatchQueue.main.async {
+                        imageView.image = image
+                    }
                 }
             }
         }

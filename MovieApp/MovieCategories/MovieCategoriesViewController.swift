@@ -85,6 +85,7 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70))
+        headerView.backgroundColor = .white
 
         let titleLabel = UILabel(frame: CGRect(x: 10, y: 17, width: tableView.frame.width - 20, height: 40))
         titleLabel.textColor = UIColor(red: 0.1, green: 0.4, blue: 0.5, alpha: 1.0)

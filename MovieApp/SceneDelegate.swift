@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene
         else { return }
         window = UIWindow(windowScene: windowScene)
-//        let detailsVC = MovieDetailsViewController()
+        let detailsVC = MovieDetailsViewController()
 //        let loginVC = LoginViewController()
 //        let listVC = MovieListViewController()
 //        let categoriesVC = MovieCategoriesViewController()

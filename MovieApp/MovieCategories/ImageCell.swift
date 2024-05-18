@@ -29,19 +29,29 @@ class ImageCell: UICollectionViewCell {
     }
     
     
-    func setImageCellData (movieModel: MovieModel) {
+    func setImageCellData(movieModel: MovieModel) {
         let url = URL(string: movieModel.imageUrl)!
+        let cacheKey = NSString(string: movieModel.imageUrl)
         
-        DispatchQueue.global().async {
-            // Fetch Image Data
-            if let data = try? Data(contentsOf: url) {
-                DispatchQueue.main.async {
-                    // Create Image and Update Image View
-                    self.imageView.image = UIImage(data: data)
+        // Check if the image is already cached
+        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
+            self.imageView.image = cachedImage
+        } else {
+            // If not, download the image
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    // Cache the image
+                    ImageCache.shared.setObject(image, forKey: cacheKey)
+                    
+                    // Update the image view on the main thread
+                    DispatchQueue.main.async {
+                        self.imageView.image = image
+                    }
                 }
             }
         }
     }
+
     
     
     private func configureImageView() {

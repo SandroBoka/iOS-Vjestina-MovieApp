@@ -16,7 +16,7 @@ class MovieTabBarController: UITabBarController {
     }
     
     private func configureTabs(){
-        let vc1 = MovieListViewController()
+        let vc1 = MovieCategoriesViewController()
         let vc2 = FavoritesViewController()
         
         vc1.tabBarItem.image = UIImage(systemName: "house.fill")
