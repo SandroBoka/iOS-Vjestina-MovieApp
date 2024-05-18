@@ -17,7 +17,8 @@ class AppRouter: AppRouterProtocol {
     
     func setStartScreen(in window: UIWindow?) {
         
-        let vc = MovieTabBarController(router: self)
+//        let vc = MovieTabBarController(router: self)
+        let vc = MovieListViewController(router: self)
         
         navigationController.pushViewController(vc, animated: false)
         

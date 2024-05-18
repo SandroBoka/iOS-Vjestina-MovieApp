@@ -51,6 +51,10 @@ class MovieCategoriesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    func configureRouter(navigationController: UINavigationController) {
+        self.router = AppRouter(navigationController: navigationController)
+    }
 }
 
 
