@@ -16,6 +16,13 @@ class MovieCategoriesViewController: UIViewController {
     var data: [[MovieModel]] = []
     let cellName = "CollectionCell"
     
+    private var router: AppRouter!
+    
+    convenience init(router: AppRouter) {
+        self.init()
+        self.router = router
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,7 +69,7 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         let movies = data[indexPath.section]
-        cell.setCellData(movies: movies)
+        cell.setCellData(movies: movies, router: router)
         return cell
     }
     
@@ -86,13 +93,13 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70))
         headerView.backgroundColor = .white
-
+        
         let titleLabel = UILabel(frame: CGRect(x: 10, y: 17, width: tableView.frame.width - 20, height: 40))
         titleLabel.textColor = UIColor(red: 0.1, green: 0.4, blue: 0.5, alpha: 1.0)
         titleLabel.font = UIFont.systemFont(ofSize: 21, weight: .heavy)
         titleLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
         headerView.addSubview(titleLabel)
-
+        
         return headerView
     }
 }

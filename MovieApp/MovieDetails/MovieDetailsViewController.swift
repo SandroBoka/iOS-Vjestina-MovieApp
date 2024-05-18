@@ -20,9 +20,17 @@ class MovieDetailsViewController: UIViewController {
     var movieCrewMembers: UILabel!
     var parentStack: UIStackView!
     
-    var movieId =  111161
+    var movieId : Int
     var movie = Movie()
     
+    init(movieId: Int) {
+        self.movieId = movieId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +41,8 @@ class MovieDetailsViewController: UIViewController {
     
         
         buildViews(movieStruct: movie.getMovie())
+        
+        navigationItem.title = "Movie Details"
     }
     
     private func buildViews(movieStruct: Movie.MovieStruct) {
@@ -49,7 +59,7 @@ class MovieDetailsViewController: UIViewController {
         header = MovieDetailsHeaderView(movieStruct: movieStruct)
         view.addSubview(header)
         header.autoPinEdge(toSuperviewEdge: .leading)
-        header.autoPinEdge(toSuperviewEdge: .top)
+        header.autoPinEdge(toSuperviewSafeArea: .top)
         header.autoPinEdge(toSuperviewEdge: .trailing)
     }
     

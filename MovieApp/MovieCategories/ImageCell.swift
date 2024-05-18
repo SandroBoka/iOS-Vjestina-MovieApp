@@ -12,6 +12,7 @@ import MovieAppData
 class ImageCell: UICollectionViewCell {
     
     var imageView = UIImageView()
+    var movieId = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,6 +33,7 @@ class ImageCell: UICollectionViewCell {
     func setImageCellData(movieModel: MovieModel) {
         let url = URL(string: movieModel.imageUrl)!
         let cacheKey = NSString(string: movieModel.imageUrl)
+        self.movieId = movieModel.id
         
         // Check if the image is already cached
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
@@ -51,7 +53,7 @@ class ImageCell: UICollectionViewCell {
             }
         }
     }
-
+    
     
     
     private func configureImageView() {
@@ -67,7 +69,7 @@ class ImageCell: UICollectionViewCell {
         imageView.addSubview(emptyView)
         emptyView.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 5)
         emptyView.autoPinEdge(.top, to: .top, of: imageView, withOffset: 5)
-
+        
         
         emptyView.autoSetDimensions(to: CGSize(width: 40, height: 40))
         
