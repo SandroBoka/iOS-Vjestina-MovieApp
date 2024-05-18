@@ -14,6 +14,7 @@ class MovieCategoriesViewController: UIViewController {
     
     var tableView = UITableView()
     var data: [[MovieModel]] = []
+    let cellName = "CollectionCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,7 @@ class MovieCategoriesViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         
-        tableView.register(CollectionCell.self, forCellReuseIdentifier: "CollectionCell")
+        tableView.register(CollectionCell.self, forCellReuseIdentifier: cellName)
     }
     
     private func setTableViewDelegates() {
@@ -57,7 +58,7 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell") as? CollectionCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellName) as? CollectionCell else {
             return UITableViewCell()
         }
         let movies = data[indexPath.section]

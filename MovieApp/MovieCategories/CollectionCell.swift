@@ -14,6 +14,7 @@ class CollectionCell: UITableViewCell {
     var movies: [MovieModel] = []
     var collectionView: UICollectionView!
     var flowLayout = UICollectionViewFlowLayout()
+    let cellName = "ImageCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,7 +46,7 @@ class CollectionCell: UITableViewCell {
         collectionView.autoPinEdgesToSuperviewEdges()
         
         setCollectionViewDelegates()
-        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: cellName)
     }
     
     private func setCollectionViewDelegates() {
@@ -66,7 +67,7 @@ extension CollectionCell: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as? ImageCell else {
             return UICollectionViewCell()
         }
         cell.setImageCellData(movieModel: movies[indexPath.item])
