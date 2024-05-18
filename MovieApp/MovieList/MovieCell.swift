@@ -11,15 +11,15 @@ import MovieAppData
 class MovieCell: UITableViewCell {
     
     var movieImageView = UIImageView()
-    var movieInfoView = UIView()
-    var movieTitleLabel = UILabel()
-    var movieSummaryLabel = UILabel()
+    var infoView = UIView()
+    var titleLabel = UILabel()
+    var summaryLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(movieImageView)
-        contentView.addSubview(movieInfoView)
+        contentView.addSubview(infoView)
         
         configureImageView()
         configureInfoView()
@@ -55,8 +55,8 @@ class MovieCell: UITableViewCell {
         
         let year = MovieUseCase().getDetails(id: movieModel.id)?.year
         
-        movieTitleLabel.text = movieModel.name + " (" + String(year!) + ")"
-        movieSummaryLabel.text = movieModel.summary
+        titleLabel.text = movieModel.name + " (" + String(year!) + ")"
+        summaryLabel.text = movieModel.summary
     }
     
     
@@ -73,34 +73,34 @@ class MovieCell: UITableViewCell {
     
     
     private func configureInfoView() {
-        movieInfoView.addSubview(movieTitleLabel)
-        movieInfoView.addSubview(movieSummaryLabel)
+        infoView.addSubview(titleLabel)
+        infoView.addSubview(summaryLabel)
         
-        movieInfoView.autoPinEdge(.leading, to: .trailing, of: movieImageView, withOffset: 10)
-        movieInfoView.autoPinEdge(toSuperviewEdge: .top)
-        movieInfoView.autoPinEdge(toSuperviewEdge: .trailing)
-        movieInfoView.autoPinEdge(toSuperviewEdge: .bottom)
+        infoView.autoPinEdge(.leading, to: .trailing, of: movieImageView, withOffset: 10)
+        infoView.autoPinEdge(toSuperviewEdge: .top)
+        infoView.autoPinEdge(toSuperviewEdge: .trailing)
+        infoView.autoPinEdge(toSuperviewEdge: .bottom)
         
-        movieTitleLabel.autoPinEdge(.top, to: .top, of: movieInfoView, withOffset: 10)
-        movieTitleLabel.autoPinEdge(.leading, to: .leading, of: movieInfoView, withOffset: 10)
-        movieTitleLabel.autoPinEdge(.trailing, to: .trailing, of: movieInfoView, withOffset: -10)
+        titleLabel.autoPinEdge(.top, to: .top, of: infoView, withOffset: 10)
+        titleLabel.autoPinEdge(.leading, to: .leading, of: infoView, withOffset: 10)
+        titleLabel.autoPinEdge(.trailing, to: .trailing, of: infoView, withOffset: -10)
         
-        movieSummaryLabel.autoPinEdge(.top, to: .bottom, of: movieTitleLabel, withOffset: 10)
-        movieSummaryLabel.autoPinEdge(.leading, to: .leading, of: movieInfoView, withOffset: 10)
-        movieSummaryLabel.autoPinEdge(.trailing, to: .trailing, of: movieInfoView, withOffset: -10)
-        movieSummaryLabel.autoPinEdge(.bottom, to: .bottom, of: movieInfoView, withOffset: -10)
+        summaryLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 10)
+        summaryLabel.autoPinEdge(.leading, to: .leading, of: infoView, withOffset: 10)
+        summaryLabel.autoPinEdge(.trailing, to: .trailing, of: infoView, withOffset: -10)
+        summaryLabel.autoPinEdge(.bottom, to: .bottom, of: infoView, withOffset: -10)
     }
     
     
     private func configureTitleLabel() {
-        movieTitleLabel.numberOfLines = 0
-        movieTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     private func configureSummaryLabel() {
-        movieSummaryLabel.textColor = .lightGray
-        movieSummaryLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        movieSummaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieSummaryLabel.numberOfLines = 0
+        summaryLabel.textColor = .lightGray
+        summaryLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        summaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        summaryLabel.numberOfLines = 0
     }
 }

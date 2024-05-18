@@ -78,24 +78,56 @@
 		AA894D5D2BB8385800F42292 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				AAF5913D2BF8A801004A6E41 /* MovieList */,
+				AAF5913C2BF8A756004A6E41 /* Login */,
+				AAF5913B2BF8A732004A6E41 /* MovieCategories */,
+				AAF5913A2BF8A70E004A6E41 /* MovieDetails */,
 				AA894D5E2BB8385800F42292 /* AppDelegate.swift */,
 				AA894D602BB8385800F42292 /* SceneDelegate.swift */,
 				AA894D672BB8385900F42292 /* Assets.xcassets */,
 				AA894D692BB8385900F42292 /* LaunchScreen.storyboard */,
 				AA894D6C2BB8385900F42292 /* Info.plist */,
-				AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */,
-				AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */,
-				AA3788682BE9082500598FC4 /* MovieListViewController.swift */,
-				AAB86C122BEA25A9006531DB /* MovieCategoriesViewController.swift */,
-				AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */,
-				AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */,
-				AA8ABA3D2BE694B7001C94D3 /* MovieDetailsFooterView.swift */,
-				AA894D7C2BB882E100F42292 /* Movie.swift */,
-				AA37886A2BE9103B00598FC4 /* MovieCell.swift */,
-				AAB86C142BEA3520006531DB /* CollectionCell.swift */,
-				AAE959E32BEA77BE000DF67C /* ImageCell.swift */,
 			);
 			path = MovieApp;
+			sourceTree = "<group>";
+		};
+		AAF5913A2BF8A70E004A6E41 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AA894D7C2BB882E100F42292 /* Movie.swift */,
+				AA8ABA3D2BE694B7001C94D3 /* MovieDetailsFooterView.swift */,
+				AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */,
+				AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */,
+				AA894D7A2BB87CE500F42292 /* MovieDetailsViewController.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
+		AAF5913B2BF8A732004A6E41 /* MovieCategories */ = {
+			isa = PBXGroup;
+			children = (
+				AAE959E32BEA77BE000DF67C /* ImageCell.swift */,
+				AAB86C142BEA3520006531DB /* CollectionCell.swift */,
+				AAB86C122BEA25A9006531DB /* MovieCategoriesViewController.swift */,
+			);
+			path = MovieCategories;
+			sourceTree = "<group>";
+		};
+		AAF5913C2BF8A756004A6E41 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AA8CF0872BBF21FC00FCCEAC /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AAF5913D2BF8A801004A6E41 /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				AA37886A2BE9103B00598FC4 /* MovieCell.swift */,
+				AA3788682BE9082500598FC4 /* MovieListViewController.swift */,
+			);
+			path = MovieList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
