@@ -54,7 +54,9 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCell else {
+            return UITableViewCell()
+        }
         let movie = movies[indexPath.section] // Modified to use indexPath.section
         cell.setCellData(movieModel: movie)
         return cell

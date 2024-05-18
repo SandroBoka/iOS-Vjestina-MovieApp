@@ -57,7 +57,9 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell") as! CollectionCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell") as? CollectionCell else {
+            return UITableViewCell()
+        }
         let movies = data[indexPath.section]
         cell.setCellData(movies: movies)
         return cell
