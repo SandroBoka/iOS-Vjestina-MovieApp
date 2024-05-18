@@ -28,14 +28,17 @@ class MovieTabBarController: UITabBarController, UITabBarControllerDelegate {
     private func configureTabs(){
         let vc1 = MovieCategoriesViewController(router: self.router)
         let vc2 = FavoritesViewController()
+        let vc3 = MovieListViewController(router: self.router)
         
         vc1.tabBarItem.image = UIImage(systemName: "house.fill")
         vc2.tabBarItem.image = UIImage(systemName: "heart")
+        vc3.tabBarItem.image = UIImage(systemName: "list.bullet.clipboard.fill")
         
         vc1.tabBarItem.title = "Movie List"
         vc2.tabBarItem.title = "Favorites"
+        vc3.tabBarItem.title = "List"
         
-        setViewControllers([vc1, vc2], animated: true)
+        setViewControllers([vc1, vc2, vc3], animated: true)
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -44,6 +47,8 @@ class MovieTabBarController: UITabBarController, UITabBarControllerDelegate {
                 self.navigationItem.title = "Movie List"
             } else if viewController is FavoritesViewController {
                 self.navigationItem.title = ""
+            } else if viewController is MovieListViewController {
+                self.navigationItem.title = "Movies"
             }
         }
 }

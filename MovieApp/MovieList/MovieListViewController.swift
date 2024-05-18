@@ -16,6 +16,13 @@ class MovieListViewController: UIViewController {
     var movies: [MovieModel] = []
     let cellName = "MovieCell"
     
+    private var router: AppRouter!
+    
+    convenience init(router: AppRouter) {
+        self.init()
+        self.router = router
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +47,10 @@ class MovieListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    @objc func showDetails(movieId: Int) {
+        router.showMovieDetails(movieId: movieId)
+    }
 }
 
 extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -59,7 +70,7 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let movie = movies[indexPath.section] // Modified to use indexPath.section
-        cell.setCellData(movieModel: movie)
+        cell.setCellData(movieModel: movie, router: router)
         return cell
     }
 
@@ -73,5 +84,12 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
         let headerView = UIView()
         headerView.backgroundColor = .clear
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? MovieCell{
+            showDetails(movieId: cell.movieId)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

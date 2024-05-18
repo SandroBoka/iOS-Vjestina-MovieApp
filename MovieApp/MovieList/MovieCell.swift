@@ -14,6 +14,8 @@ class MovieCell: UITableViewCell {
     var infoView = UIView()
     var titleLabel = UILabel()
     var summaryLabel = UILabel()
+    var movieId = 0
+    private var router: AppRouter!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,9 +42,11 @@ class MovieCell: UITableViewCell {
     }
     
     
-    func setCellData(movieModel: MovieModel) {
+    func setCellData(movieModel: MovieModel, router: AppRouter) {
         let url = URL(string: movieModel.imageUrl)!
         let cacheKey = NSString(string: movieModel.imageUrl)
+        self.router = router
+        movieId = movieModel.id
         
         // Check if the image is already cached
         if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
