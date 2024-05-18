@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA1AD52C2BF8C7F800B43C1F /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1AD52B2BF8C7F800B43C1F /* FavoritesViewController.swift */; };
+		AA1AD52E2BF8F05000B43C1F /* MovieTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1AD52D2BF8F05000B43C1F /* MovieTabBarController.swift */; };
 		AA21DC0E2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */; };
 		AA21DC102BE65DD4008BCA25 /* MovieDetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */; };
 		AA3788692BE9082500598FC4 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3788682BE9082500598FC4 /* MovieListViewController.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA1AD52B2BF8C7F800B43C1F /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		AA1AD52D2BF8F05000B43C1F /* MovieTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTabBarController.swift; sourceTree = "<group>"; };
 		AA21DC0D2BE65DA9008BCA25 /* MovieDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsHeaderView.swift; sourceTree = "<group>"; };
 		AA21DC0F2BE65DD4008BCA25 /* MovieDetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsContentView.swift; sourceTree = "<group>"; };
 		AA3788682BE9082500598FC4 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA1AD52A2BF8C7D400B43C1F /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				AA1AD52B2BF8C7F800B43C1F /* FavoritesViewController.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		AA894D522BB8385800F42292 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +90,7 @@
 		AA894D5D2BB8385800F42292 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA1AD52A2BF8C7D400B43C1F /* Favorites */,
 				AAF5913D2BF8A801004A6E41 /* MovieList */,
 				AAF5913C2BF8A756004A6E41 /* Login */,
 				AAF5913B2BF8A732004A6E41 /* MovieCategories */,
@@ -87,6 +100,7 @@
 				AA894D672BB8385900F42292 /* Assets.xcassets */,
 				AA894D692BB8385900F42292 /* LaunchScreen.storyboard */,
 				AA894D6C2BB8385900F42292 /* Info.plist */,
+				AA1AD52D2BF8F05000B43C1F /* MovieTabBarController.swift */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -210,6 +224,8 @@
 			files = (
 				AA894D5F2BB8385800F42292 /* AppDelegate.swift in Sources */,
 				AAB86C132BEA25A9006531DB /* MovieCategoriesViewController.swift in Sources */,
+				AA1AD52C2BF8C7F800B43C1F /* FavoritesViewController.swift in Sources */,
+				AA1AD52E2BF8F05000B43C1F /* MovieTabBarController.swift in Sources */,
 				AA894D612BB8385800F42292 /* SceneDelegate.swift in Sources */,
 				AA894D7D2BB882E100F42292 /* Movie.swift in Sources */,
 				AA21DC102BE65DD4008BCA25 /* MovieDetailsContentView.swift in Sources */,

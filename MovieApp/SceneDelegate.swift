@@ -23,8 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let detailsVC = MovieDetailsViewController()
 //        let loginVC = LoginViewController()
 //        let listVC = MovieListViewController()
-        let categoriesVC = MovieCategoriesViewController()
-        window?.rootViewController = categoriesVC
+//        let categoriesVC = MovieCategoriesViewController()
+        window?.rootViewController = MovieTabBarController()
         window?.makeKeyAndVisible()
     }
     
