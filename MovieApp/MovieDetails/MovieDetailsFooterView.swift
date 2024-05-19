@@ -29,6 +29,7 @@ class MovieDetailsFooterView: UIView {
     
     private func displayCrewInfo(movieStruct: Movie.MovieStruct) {
         let parentStack = UIStackView()
+        parentStack.alpha = 0 // animation
         self.addSubview(parentStack)
         parentStack.axis = .vertical
         parentStack.alignment = .fill
@@ -40,6 +41,11 @@ class MovieDetailsFooterView: UIView {
         
         let numOfRows = (movieStruct.crewNames.count + 2) / 3
         var index = 0
+        
+        // animation
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseInOut, animations: {
+                   parentStack.alpha = 1
+               })
         
         for _ in 0...numOfRows - 1{
             let innerStackView = UIStackView()

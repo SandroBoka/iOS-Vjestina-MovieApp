@@ -45,5 +45,11 @@ class MovieDetailsContentView: UIView {
         movieSummary.autoPinEdge(.top, to: .top, of: overviewLabel, withOffset: 40)
         movieSummary.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -20)
         movieSummary.autoPinEdge(.bottom, to: .bottom, of: self)
+        
+        movieSummary.transform = CGAffineTransform(translationX: -self.bounds.width, y: 0)
+        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseInOut, animations: {
+            movieSummary.transform = .identity
+        }, completion: nil)
     }
+
 }
