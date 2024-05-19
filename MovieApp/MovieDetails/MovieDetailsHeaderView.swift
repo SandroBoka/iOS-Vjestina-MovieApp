@@ -78,62 +78,80 @@ class MovieDetailsHeaderView: UIView {
         movieName.text = movieStruct.name
         movieYear.text = "(" + String(movieStruct.year) + ")"
         let dateSplited = movieStruct.releaseDate.split(separator: "-")
-        movieReleseDate.text = dateSplited[2] + "/" + dateSplited[1] + "/" + dateSplited[0] + " (US)"
+        movieReleseDate.text = "\(dateSplited[2])/\(dateSplited[1])/\(dateSplited[0]) (US)"
         
         movieCategories.text = movieStruct.categories.map { String(describing: $0).capitalized }.joined(separator: ", ")
         
         let hours = Int(movieStruct.duration / 60)
         let minutes = movieStruct.duration % 60
-        movieDuration.text = String(hours) + "h " + String(minutes) + "m"
+        movieDuration.text = "\(hours)h \(minutes)m"
         
-        movieRating.textColor = .white
+        // Configure Labels
+        [movieRating, movieName, movieYear, movieReleseDate, movieCategories, movieDuration].forEach {
+            $0.textColor = .white
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0)
+        }
+        
         movieRating.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
-        self.addSubview(movieRating)
-        movieRating.autoPinEdge(.leading, to: .leading, of: self, withOffset: 15)
-        movieRating.autoPinEdge(.top, to: .top, of: self, withOffset: 120)
+        movieName.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
+        movieYear.font = UIFont.systemFont(ofSize: 22)
+        movieReleseDate.font = UIFont.systemFont(ofSize: 16)
+        movieCategories.font = UIFont.systemFont(ofSize: 16)
+        movieDuration.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         
         let userScoreLabel = UILabel()
         userScoreLabel.text = "User score"
         userScoreLabel.textColor = .white
         userScoreLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        userScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(userScoreLabel)
-        userScoreLabel.autoPinEdge(.leading, to: .trailing, of: movieRating, withOffset: 10)
-        userScoreLabel.autoAlignAxis(.horizontal, toSameAxisOf: movieRating)
-        userScoreLabel.autoPinEdge(.trailing, to: .trailing, of: self)
         
-        movieName.textColor = .white
-        movieName.font = UIFont.systemFont(ofSize: 22, weight: .heavy)
-        self.addSubview(movieName)
-        movieName.autoPinEdge(.leading, to: .leading, of: self, withOffset: 15)
-        movieName.autoPinEdge(.top, to: .top, of: movieRating, withOffset: 50)
+        // constraints
+        NSLayoutConstraint.activate([
+            movieRating.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            movieRating.topAnchor.constraint(equalTo: self.topAnchor, constant: 120),
+            
+            userScoreLabel.leadingAnchor.constraint(equalTo: movieRating.trailingAnchor, constant: 10),
+            userScoreLabel.centerYAnchor.constraint(equalTo: movieRating.centerYAnchor),
+            
+            movieName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            movieName.topAnchor.constraint(equalTo: movieRating.bottomAnchor, constant: 10),
+            
+            movieYear.leadingAnchor.constraint(equalTo: movieName.trailingAnchor, constant: 5),
+            movieYear.centerYAnchor.constraint(equalTo: movieName.centerYAnchor),
+            
+            movieReleseDate.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            movieReleseDate.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 10),
+            
+            movieCategories.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            movieCategories.topAnchor.constraint(equalTo: movieReleseDate.bottomAnchor, constant: 10),
+            
+            movieDuration.leadingAnchor.constraint(equalTo: movieCategories.trailingAnchor, constant: 15),
+            movieDuration.centerYAnchor.constraint(equalTo: movieCategories.centerYAnchor),
+        ])
         
-        movieYear.textColor = .white
-        movieYear.font = UIFont.systemFont(ofSize: 22)
-        self.addSubview(movieYear)
-        movieYear.autoPinEdge(.leading, to: .trailing, of: movieName, withOffset: 5)
-        movieYear.autoPinEdge(.top, to: .top, of: movieRating, withOffset: 50)
-        movieYear.autoPinEdge(.trailing, to: .trailing, of: self)
+        // animations
+        let labels = [movieRating, userScoreLabel, movieName, movieYear, movieReleseDate, movieCategories, movieDuration]
         
-        movieReleseDate.textColor = .white
-        movieReleseDate.font = UIFont.systemFont(ofSize: 16)
-        self.addSubview(movieReleseDate)
-        movieReleseDate.autoPinEdge(.leading, to: .leading, of: self, withOffset: 15)
-        movieReleseDate.autoPinEdge(.top, to: .top, of: movieName, withOffset: 50)
-        movieReleseDate.autoPinEdge(.trailing, to: .trailing, of: self)
+        self.layoutIfNeeded()
         
-        movieCategories.textColor = .white
-        movieCategories.font = UIFont.systemFont(ofSize: 16)
-        self.addSubview(movieCategories)
-        movieCategories.autoPinEdge(.leading, to: .leading, of: self, withOffset: 15)
-        movieCategories.autoPinEdge(.top, to: .top, of: movieReleseDate, withOffset: 25)
+        for label in labels {
+            label.transform = transform.translatedBy(x: -self.frame.width, y: 0)
+        }
         
-        movieDuration.textColor = .white
-        movieDuration.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        self.addSubview(movieDuration)
-        movieDuration.autoPinEdge(.leading, to: .trailing, of: movieCategories, withOffset: 15)
-        movieDuration.autoPinEdge(.top, to: .top, of: movieReleseDate, withOffset: 25)
-        movieDuration.autoPinEdge(.trailing, to: .trailing, of: self)
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0.1,
+            options: [.curveLinear],
+            animations: {
+                for label in labels {
+                    label.transform = .identity
+                }
+            })
     }
+
+    
     
     
     private func buildButton() {

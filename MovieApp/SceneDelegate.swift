@@ -21,12 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         else { return }
         window = UIWindow(windowScene: windowScene)
         
-//        let tabBarVC = MovieTabBarController()
-//        window?.rootViewController = tabBarVC
-//        window?.makeKeyAndVisible()
+        let tabBarVC = MovieTabBarController()
+        window?.rootViewController = tabBarVC
+        window?.makeKeyAndVisible()
         
-        let router = AppRouter(navigationController: UINavigationController())
-        router.setStartScreen(in: window)
+//        let router = AppRouter(navigationController: UINavigationController())
+//        router.setStartScreen(in: window)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
