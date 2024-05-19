@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import PureLayout
 
 class MovieDetailsContentView: UIView {
     
@@ -46,10 +47,14 @@ class MovieDetailsContentView: UIView {
         movieSummary.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -20)
         movieSummary.autoPinEdge(.bottom, to: .bottom, of: self)
         
-        movieSummary.transform = CGAffineTransform(translationX: -self.bounds.width, y: 0)
-        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseInOut, animations: {
-            movieSummary.transform = .identity
-        }, completion: nil)
+//        movieSummary.transform = transform.translatedBy(x: -self.frame.width, y: 0)
+//        UIView.animate(
+//            withDuration: 0.2,
+//            delay: 0.1,
+//            options: [.curveLinear],
+//            animations: {
+//                self.layoutIfNeeded()
+//                movieSummary.transform = .identity
+//            })
     }
-
 }
