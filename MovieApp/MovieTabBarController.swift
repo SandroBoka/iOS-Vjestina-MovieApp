@@ -16,6 +16,8 @@ class MovieTabBarController: UITabBarController, UITabBarControllerDelegate {
 //        self.router = router
 //    }
     
+    // I made two versions, one where the views inside of this tab bar are their own navigation controllers and one where the tab bar itself is
+    // the navigation controller (the parts throuout the code which are commented out are the second approach)
     
     override func viewDidLoad() {
         super.viewDidLoad()

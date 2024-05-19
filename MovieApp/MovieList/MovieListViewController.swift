@@ -28,6 +28,7 @@ class MovieListViewController: UIViewController {
         
         movies = MovieUseCase().allMovies
         view.backgroundColor = .white
+        navigationItem.title = "Movie List"
         configureTableView()
     }
     
