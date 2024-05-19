@@ -21,6 +21,7 @@ class MovieTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         delegate = self
         navigationItem.title = "Movie List"
+        tabBar.tintColor = .black
         
         configureTabs()
     }
