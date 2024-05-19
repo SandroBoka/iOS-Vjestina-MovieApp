@@ -31,8 +31,10 @@ class MovieTabBarController: UITabBarController, UITabBarControllerDelegate {
         let vc1 = MovieCategoriesViewController()
         let vc2 = FavoritesViewController()
         
-        vc1.tabBarItem.image = UIImage(systemName: "house.fill")
+        vc1.tabBarItem.image = UIImage(systemName: "house")
+        vc1.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         vc2.tabBarItem.image = UIImage(systemName: "heart")
+        vc2.tabBarItem.selectedImage = UIImage(systemName: "heart.fill")
         
         vc1.title = "Movie List"
         vc2.tabBarItem.title = "Favorites"
