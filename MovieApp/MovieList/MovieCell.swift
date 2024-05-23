@@ -48,22 +48,7 @@ class MovieCell: UITableViewCell {
         self.router = router
         movieId = movieModel.id
         
-        // Check if the image is already cached
-        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
-            self.movieImageView.image = cachedImage
-        } else {
-            // If not, download the image
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                    // Cache the image
-                    ImageCache.shared.setObject(image, forKey: cacheKey)
-                    // Update the image view on the main thread
-                    DispatchQueue.main.async {
-                        self.movieImageView.image = image
-                    }
-                }
-            }
-        }
+        self.movieImageView.kf.setImage(with: url)
         
         let year = MovieUseCase().getDetails(id: movieModel.id)?.year
         

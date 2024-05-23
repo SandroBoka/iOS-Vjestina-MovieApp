@@ -8,6 +8,7 @@
 import UIKit
 import PureLayout
 import MovieAppData
+import Kingfisher
 
 class ImageCell: UICollectionViewCell {
     
@@ -32,26 +33,9 @@ class ImageCell: UICollectionViewCell {
     
     func setImageCellData(movieModel: MovieModel) {
         let url = URL(string: movieModel.imageUrl)!
-        let cacheKey = NSString(string: movieModel.imageUrl)
         self.movieId = movieModel.id
         
-        // Check if the image is already cached
-        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
-            self.imageView.image = cachedImage
-        } else {
-            // If not, download the image
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                    // Cache the image
-                    ImageCache.shared.setObject(image, forKey: cacheKey)
-                    
-                    // Update the image view on the main thread
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                    }
-                }
-            }
-        }
+        imageView.kf.setImage(with: url)
     }
     
     

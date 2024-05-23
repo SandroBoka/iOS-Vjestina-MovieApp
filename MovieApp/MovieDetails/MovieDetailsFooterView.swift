@@ -10,7 +10,9 @@ import UIKit
 
 class MovieDetailsFooterView: UIView {
     
-    init(movieStruct: Movie.MovieStruct) {
+    var parentStack: UIStackView!
+    
+    init(movieStruct: Movie) {
         super.init(frame: .zero)
         setup(movieStruct: movieStruct)
     }
@@ -21,14 +23,14 @@ class MovieDetailsFooterView: UIView {
     }
     
     
-    private func setup(movieStruct: Movie.MovieStruct) {
+    private func setup(movieStruct: Movie) {
         self.backgroundColor = .white
         
         displayCrewInfo(movieStruct: movieStruct)
     }
     
-    private func displayCrewInfo(movieStruct: Movie.MovieStruct) {
-        let parentStack = UIStackView()
+    private func displayCrewInfo(movieStruct: Movie) {
+        parentStack = UIStackView()
         parentStack.alpha = 0 // animation
         self.addSubview(parentStack)
         parentStack.axis = .vertical
@@ -41,11 +43,6 @@ class MovieDetailsFooterView: UIView {
         
         let numOfRows = (movieStruct.crewNames.count + 2) / 3
         var index = 0
-        
-        // animation
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseInOut, animations: {
-                   parentStack.alpha = 1
-               })
         
         for _ in 0...numOfRows - 1{
             let innerStackView = UIStackView()
@@ -84,5 +81,15 @@ class MovieDetailsFooterView: UIView {
                 }
             }
         }
+    }
+    
+    func startAnimation() {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.01,
+            options: .curveEaseInOut,
+            animations: {
+                self.parentStack.alpha = 1
+               })
     }
 }

@@ -12,6 +12,13 @@ import PureLayout
 
 class FavoritesViewController: UIViewController {
     
+    private var router: AppRouter!
+    
+    convenience init(router: AppRouter) {
+        self.init()
+        self.router = router
+    }
+    
     override func viewDidLoad() {
         view.backgroundColor = .white
     }

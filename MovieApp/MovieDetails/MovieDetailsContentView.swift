@@ -11,7 +11,9 @@ import PureLayout
 
 class MovieDetailsContentView: UIView {
     
-    init(movieStruct: Movie.MovieStruct) {
+    var movieSummary: UILabel!
+    
+    init(movieStruct: Movie) {
         super.init(frame: .zero)
         setup(movieStruct: movieStruct)
     }
@@ -22,10 +24,10 @@ class MovieDetailsContentView: UIView {
     }
     
     
-    private func setup(movieStruct: Movie.MovieStruct) {
+    private func setup(movieStruct: Movie) {
         self.backgroundColor = .white
         
-        let movieSummary = UILabel()
+        movieSummary = UILabel()
         
         movieSummary.text = movieStruct.summary
         
@@ -41,20 +43,30 @@ class MovieDetailsContentView: UIView {
         movieSummary.font = UIFont.systemFont(ofSize: 15)
         movieSummary.translatesAutoresizingMaskIntoConstraints = false
         movieSummary.numberOfLines = 0
+        movieSummary.alpha = 0
         self.addSubview(movieSummary)
         movieSummary.autoPinEdge(.leading, to: .leading, of: self, withOffset: 15)
         movieSummary.autoPinEdge(.top, to: .top, of: overviewLabel, withOffset: 40)
         movieSummary.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -20)
         movieSummary.autoPinEdge(.bottom, to: .bottom, of: self)
         
-//        movieSummary.transform = transform.translatedBy(x: -self.frame.width, y: 0)
-//        UIView.animate(
-//            withDuration: 0.2,
-//            delay: 0.1,
-//            options: [.curveLinear],
-//            animations: {
-//                self.layoutIfNeeded()
-//                movieSummary.transform = .identity
-//            })
+        self.layoutIfNeeded()
+        
+    }
+    
+    func startAnimation() {
+        movieSummary.transform = transform.translatedBy(x: -self.frame.width, y: 0)
+        movieSummary.alpha = 1
+        
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0.01,
+            options: [.curveLinear],
+            animations: { [weak self] in
+                guard let self else { return }
+                
+                self.movieSummary.transform = .identity
+                self.layoutIfNeeded()
+            })
     }
 }

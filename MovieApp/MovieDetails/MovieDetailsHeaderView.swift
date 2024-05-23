@@ -8,12 +8,14 @@
 import Foundation
 import UIKit
 import PureLayout
+import Kingfisher
 
 class MovieDetailsHeaderView: UIView {
     
     var movieCategories = UILabel()
+    var animationLabels: [UILabel]!
     
-    init(movieStruct: Movie.MovieStruct) {
+    init(movieStruct: Movie) {
         super.init(frame: .zero)
         setup(movieStruct: movieStruct)
     }
@@ -24,7 +26,7 @@ class MovieDetailsHeaderView: UIView {
     }
     
     
-    private func setup(movieStruct: Movie.MovieStruct) {
+    private func setup(movieStruct: Movie) {
         getImage(movieStruct: movieStruct)
         
         buildImageLabels(movieStruct: movieStruct)
@@ -33,28 +35,11 @@ class MovieDetailsHeaderView: UIView {
     }
     
     
-    private func getImage(movieStruct: Movie.MovieStruct) {
+    private func getImage(movieStruct: Movie) {
         let imageView = UIImageView()
         let url = URL(string: movieStruct.imageUrl)!
-        let cacheKey = NSString(string: movieStruct.imageUrl) // Cache key
         
-        // Check if the image is already cached
-        if let cachedImage = ImageCache.shared.object(forKey: cacheKey) {
-            imageView.image = cachedImage
-        } else {
-            // If not, download the image
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                    // Cache the image
-                    ImageCache.shared.setObject(image, forKey: cacheKey)
-                    
-                    // Update the image view on the main thread
-                    DispatchQueue.main.async {
-                        imageView.image = image
-                    }
-                }
-            }
-        }
+        imageView.kf.setImage(with: url)
         
         self.addSubview(imageView)
         let bounds = UIScreen.main.bounds
@@ -67,7 +52,7 @@ class MovieDetailsHeaderView: UIView {
     }
     
     
-    private func buildImageLabels(movieStruct: Movie.MovieStruct) {
+    private func buildImageLabels(movieStruct: Movie) {
         let movieRating = UILabel()
         let movieName = UILabel()
         let movieYear = UILabel()
@@ -100,6 +85,9 @@ class MovieDetailsHeaderView: UIView {
         movieCategories.font = UIFont.systemFont(ofSize: 16)
         movieDuration.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         
+        movieName.numberOfLines = 0
+        movieName.lineBreakMode = .byWordWrapping
+        
         let userScoreLabel = UILabel()
         userScoreLabel.text = "User score"
         userScoreLabel.textColor = .white
@@ -117,6 +105,7 @@ class MovieDetailsHeaderView: UIView {
             
             movieName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             movieName.topAnchor.constraint(equalTo: movieRating.bottomAnchor, constant: 10),
+            movieName.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -15),
             
             movieYear.leadingAnchor.constraint(equalTo: movieName.trailingAnchor, constant: 5),
             movieYear.centerYAnchor.constraint(equalTo: movieName.centerYAnchor),
@@ -131,27 +120,32 @@ class MovieDetailsHeaderView: UIView {
             movieDuration.centerYAnchor.constraint(equalTo: movieCategories.centerYAnchor),
         ])
         
-        // animations
-        let labels = [movieRating, userScoreLabel, movieName, movieYear, movieReleseDate, movieCategories, movieDuration]
+        animationLabels = [movieRating, userScoreLabel, movieName, movieYear, movieReleseDate, movieCategories, movieDuration]
+        for label in animationLabels {
+            label.alpha = 0
+        }
         
         self.layoutIfNeeded()
-        
-        for label in labels {
+    }
+    
+    
+    func startAnimation() {
+        for label in animationLabels {
             label.transform = transform.translatedBy(x: -self.frame.width, y: 0)
         }
         
         UIView.animate(
             withDuration: 0.2,
-            delay: 0.1,
+            delay: 0.01,
             options: [.curveLinear],
             animations: {
-                for label in labels {
+                for label in self.animationLabels {
+                    label.alpha = 1
                     label.transform = .identity
                 }
+                self.layoutIfNeeded()
             })
     }
-
-    
     
     
     private func buildButton() {

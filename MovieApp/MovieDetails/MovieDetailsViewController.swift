@@ -12,16 +12,12 @@ import MovieAppData
 
 class MovieDetailsViewController: UIViewController {
     
-    var header: UIView!
-    var content: UIView!
-    var footer: UIView!
-    var whiteRectangle: UIView!
-    var stackView: UIStackView!
-    var movieCrewMembers: UILabel!
-    var parentStack: UIStackView!
+    var header: MovieDetailsHeaderView!
+    var content: MovieDetailsContentView!
+    var footer: MovieDetailsFooterView!
     
     var movieId : Int
-    var movie = Movie()
+    var movie : Movie!
     
     init(movieId: Int) {
         self.movieId = movieId
@@ -40,12 +36,20 @@ class MovieDetailsViewController: UIViewController {
         }
     
         
-        buildViews(movieStruct: movie.getMovie())
+        buildViews(movieStruct: self.movie)
         
         navigationItem.title = "Movie Details"
     }
     
-    private func buildViews(movieStruct: Movie.MovieStruct) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        header.startAnimation()
+        content.startAnimation()
+        footer.startAnimation()
+    }
+    
+    private func buildViews(movieStruct: Movie) {
         view.backgroundColor = .white
         
         buildHeader(movieStruct: movieStruct)
@@ -55,7 +59,7 @@ class MovieDetailsViewController: UIViewController {
         buildFooter(movieStruct: movieStruct)
     }
     
-    private func buildHeader(movieStruct: Movie.MovieStruct) {
+    private func buildHeader(movieStruct: Movie) {
         header = MovieDetailsHeaderView(movieStruct: movieStruct)
         view.addSubview(header)
         header.autoPinEdge(toSuperviewEdge: .leading)
@@ -64,7 +68,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     
-    private func buildContent(movieStruct: Movie.MovieStruct){
+    private func buildContent(movieStruct: Movie){
         content = MovieDetailsContentView(movieStruct: movieStruct)
         view.addSubview(content)
         content.autoPinEdge(.top, to: .bottom, of: header)
@@ -73,7 +77,7 @@ class MovieDetailsViewController: UIViewController {
     }
     
     
-    private func buildFooter(movieStruct: Movie.MovieStruct) {
+    private func buildFooter(movieStruct: Movie) {
         footer = MovieDetailsFooterView(movieStruct: movieStruct)
         view.addSubview(footer)
         footer.autoPinEdge(toSuperviewEdge: .leading)
