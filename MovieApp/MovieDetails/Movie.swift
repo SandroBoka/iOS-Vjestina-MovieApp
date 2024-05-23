@@ -8,33 +8,19 @@
 import Foundation
 import MovieAppData
 
-class Movie {
-    var id: Int?
-    var name: String?
-    var summary: String?
-    var imageUrl: String?
-    var releaseDate: String?
-    var year: Int?
-    var duration: Int?
-    var rating: Double?
-    var categories: [MovieCategoryModel]?
-    var crewMembers: [MovieCrewMemberModel]?
+struct Movie {
+    var id: Int
+    var name: String
+    var summary: String
+    var imageUrl: String
+    var releaseDate: String
+    var year: Int
+    var duration: Int
+    var rating: Double
+    var categories: [MovieCategoryModel]
     var crewNames = [String]()
     var crewRoles = [String]()
     
-    struct MovieStruct {
-        var id: Int
-        var name: String
-        var summary: String
-        var imageUrl: String
-        var releaseDate: String
-        var year: Int
-        var duration: Int
-        var rating: Double
-        var categories: [MovieCategoryModel]
-        var crewNames: [String]
-        var crewRoles: [String]
-    }
     
     init(movieDetails: MovieDetailsModel) {
         id = movieDetails.id
@@ -46,31 +32,22 @@ class Movie {
         duration = movieDetails.duration
         rating = movieDetails.rating
         categories = movieDetails.categories
-        crewMembers = movieDetails.crewMembers
-        
-        if let crew = crewMembers {
-            for person in crew {
-                crewNames.append(person.name)
-                crewRoles.append(person.role)
-            }
-        }
+        crewNames = movieDetails.crewMembers.map { $0.name }
+        crewRoles = movieDetails.crewMembers.map { $0.role }
     }
     
+    // Default initializer for an empty movie
     init() {
-        
-    }
-    
-    func getMovie() -> MovieStruct {
-        return MovieStruct(id: self.id ?? 0,
-                           name: self.name ?? "",
-                           summary: self.summary ?? "",
-                           imageUrl: self.imageUrl ?? "",
-                           releaseDate: self.releaseDate ?? "",
-                           year: self.year ?? 0,
-                           duration: self.duration ?? 0,
-                           rating: self.rating ?? 0.0,
-                           categories: self.categories ?? [],
-                           crewNames: self.crewNames,
-                           crewRoles: self.crewRoles)
+        id = 0
+        name = ""
+        summary = ""
+        imageUrl = ""
+        releaseDate = ""
+        year = 0
+        duration = 0
+        rating = 0.0
+        categories = []
+        crewNames = []
+        crewRoles = []
     }
 }

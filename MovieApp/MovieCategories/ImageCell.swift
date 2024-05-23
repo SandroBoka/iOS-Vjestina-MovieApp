@@ -8,10 +8,12 @@
 import UIKit
 import PureLayout
 import MovieAppData
+import Kingfisher
 
 class ImageCell: UICollectionViewCell {
     
     var imageView = UIImageView()
+    var movieId = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,19 +31,13 @@ class ImageCell: UICollectionViewCell {
     }
     
     
-    func setImageCellData (movieModel: MovieModel) {
+    func setImageCellData(movieModel: MovieModel) {
         let url = URL(string: movieModel.imageUrl)!
+        self.movieId = movieModel.id
         
-        DispatchQueue.global().async {
-            // Fetch Image Data
-            if let data = try? Data(contentsOf: url) {
-                DispatchQueue.main.async {
-                    // Create Image and Update Image View
-                    self.imageView.image = UIImage(data: data)
-                }
-            }
-        }
+        imageView.kf.setImage(with: url)
     }
+    
     
     
     private func configureImageView() {
@@ -57,7 +53,7 @@ class ImageCell: UICollectionViewCell {
         imageView.addSubview(emptyView)
         emptyView.autoPinEdge(.leading, to: .leading, of: imageView, withOffset: 5)
         emptyView.autoPinEdge(.top, to: .top, of: imageView, withOffset: 5)
-
+        
         
         emptyView.autoSetDimensions(to: CGSize(width: 40, height: 40))
         

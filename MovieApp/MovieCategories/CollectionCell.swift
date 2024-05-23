@@ -15,6 +15,7 @@ class CollectionCell: UITableViewCell {
     var collectionView: UICollectionView!
     var flowLayout = UICollectionViewFlowLayout()
     let cellName = "ImageCell"
+    private var router: AppRouter!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,8 +30,9 @@ class CollectionCell: UITableViewCell {
     }
     
     
-    func setCellData(movies: [MovieModel]) {
+    func setCellData(movies: [MovieModel], router: AppRouter) {
         self.movies = movies
+        self.router = router
     }
     
     
@@ -53,6 +55,10 @@ class CollectionCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
+    @objc func showDetails(movieId: Int) {
+        router.showMovieDetails(movieId: movieId)
+    }
 }
 
 
@@ -72,6 +78,12 @@ extension CollectionCell: UICollectionViewDataSource, UICollectionViewDelegate {
         }
         cell.setImageCellData(movieModel: movies[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell{
+            showDetails(movieId: cell.movieId)
+        }
     }
 }
 

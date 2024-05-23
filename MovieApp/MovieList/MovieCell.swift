@@ -14,6 +14,8 @@ class MovieCell: UITableViewCell {
     var infoView = UIView()
     var titleLabel = UILabel()
     var summaryLabel = UILabel()
+    var movieId = 0
+    private var router: AppRouter!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,24 +42,20 @@ class MovieCell: UITableViewCell {
     }
     
     
-    func setCellData(movieModel: MovieModel) {
+    func setCellData(movieModel: MovieModel, router: AppRouter) {
         let url = URL(string: movieModel.imageUrl)!
+        let cacheKey = NSString(string: movieModel.imageUrl)
+        self.router = router
+        movieId = movieModel.id
         
-        DispatchQueue.global().async {
-            // Fetch Image Data
-            if let data = try? Data(contentsOf: url) {
-                DispatchQueue.main.async {
-                    // Create Image and Update Image View
-                    self.movieImageView.image = UIImage(data: data)
-                }
-            }
-        }
+        self.movieImageView.kf.setImage(with: url)
         
         let year = MovieUseCase().getDetails(id: movieModel.id)?.year
         
         titleLabel.text = movieModel.name + " (" + String(year!) + ")"
         summaryLabel.text = movieModel.summary
     }
+
     
     
     private func configureImageView() {
