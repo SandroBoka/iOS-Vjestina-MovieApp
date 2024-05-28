@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import PureLayout
-import MovieAppData
+import Combine
 
 class MovieDetailsViewController: UIViewController {
     
@@ -16,11 +16,13 @@ class MovieDetailsViewController: UIViewController {
     var content: MovieDetailsContentView!
     var footer: MovieDetailsFooterView!
     
-    var movieId : Int
     var movie : Movie!
     
+    private var detailsViewModel : DetailsViewModel
+    private var disposables = Set<AnyCancellable>()
+    
     init(movieId: Int) {
-        self.movieId = movieId
+        detailsViewModel = DetailsViewModel(movieId: movieId)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,10 +33,16 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let movieDetails = MovieUseCase().getDetails(id: movieId) {
-            movie = Movie(movieDetails: movieDetails)
-        }
-    
+        movie = detailsViewModel.movie
+        detailsViewModel
+            .$movie
+            .receive(on: DispatchQueue.main)
+            .sink { movie in
+
+                self.movie = movie
+                self.buildViews(movieStruct: self.movie)
+            }
+            .store(in: &disposables)
         
         buildViews(movieStruct: self.movie)
         
