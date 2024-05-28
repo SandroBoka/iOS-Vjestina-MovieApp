@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MovieAppData
 
 class MovieCell: UITableViewCell {
     
@@ -42,17 +41,15 @@ class MovieCell: UITableViewCell {
     }
     
     
-    func setCellData(movieModel: MovieModel, router: AppRouter) {
-        let url = URL(string: movieModel.imageUrl)!
-        let cacheKey = NSString(string: movieModel.imageUrl)
+    func setCellData(movieModel: Movie, router: AppRouter) {
+        let url = movieModel.imageUrl
         self.router = router
         movieId = movieModel.id
         
         self.movieImageView.kf.setImage(with: url)
         
-        let year = MovieUseCase().getDetails(id: movieModel.id)?.year
-        
-        titleLabel.text = movieModel.name + " (" + String(year!) + ")"
+        let year = movieModel.year
+        titleLabel.text = movieModel.name + " (" + String(year) + ")"
         summaryLabel.text = movieModel.summary
     }
 

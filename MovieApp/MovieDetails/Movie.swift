@@ -12,7 +12,7 @@ struct Movie {
     var id: Int
     var name: String
     var summary: String
-    var imageUrl: String
+    var imageUrl: URL
     var releaseDate: String
     var year: Int
     var duration: Int
@@ -26,7 +26,7 @@ struct Movie {
         id = movieDetails.id
         name = movieDetails.name
         summary = movieDetails.summary
-        imageUrl = movieDetails.imageUrl
+        imageUrl = URL(string:movieDetails.imageUrl)!
         releaseDate = movieDetails.releaseDate
         year = movieDetails.year
         duration = movieDetails.duration
@@ -34,20 +34,5 @@ struct Movie {
         categories = movieDetails.categories
         crewNames = movieDetails.crewMembers.map { $0.name }
         crewRoles = movieDetails.crewMembers.map { $0.role }
-    }
-    
-    // Default initializer for an empty movie
-    init() {
-        id = 0
-        name = ""
-        summary = ""
-        imageUrl = ""
-        releaseDate = ""
-        year = 0
-        duration = 0
-        rating = 0.0
-        categories = []
-        crewNames = []
-        crewRoles = []
     }
 }

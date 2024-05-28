@@ -37,9 +37,8 @@ class MovieDetailsHeaderView: UIView {
     
     private func getImage(movieStruct: Movie) {
         let imageView = UIImageView()
-        let url = URL(string: movieStruct.imageUrl)!
         
-        imageView.kf.setImage(with: url)
+        imageView.kf.setImage(with: movieStruct.imageUrl)
         
         self.addSubview(imageView)
         let bounds = UIScreen.main.bounds

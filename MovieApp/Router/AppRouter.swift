@@ -25,7 +25,7 @@ class AppRouter: AppRouterProtocol {
     func showTabView() {
         let tabViewController = MovieTabBarController()
         let vc1 = MovieCategoriesViewController(router: self)
-        //        let vc2 = MovieListViewController(router: self)
+//        let vc2 = MovieListViewController(router: self)
         let vc2 = FavoritesViewController(router: self)
         
         vc1.tabBarItem.image = UIImage(systemName: "house")

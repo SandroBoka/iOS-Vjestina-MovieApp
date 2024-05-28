@@ -7,7 +7,6 @@
 
 import UIKit
 import PureLayout
-import MovieAppData
 import Kingfisher
 
 class ImageCell: UICollectionViewCell {
@@ -31,11 +30,9 @@ class ImageCell: UICollectionViewCell {
     }
     
     
-    func setImageCellData(movieModel: MovieModel) {
-        let url = URL(string: movieModel.imageUrl)!
+    func setImageCellData(movieModel: MovieCellData) {
         self.movieId = movieModel.id
-        
-        imageView.kf.setImage(with: url)
+        self.imageView.kf.setImage(with: movieModel.url)
     }
     
     

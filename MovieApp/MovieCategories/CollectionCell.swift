@@ -7,11 +7,10 @@
 
 import UIKit
 import PureLayout
-import MovieAppData
 
 class CollectionCell: UITableViewCell {
     
-    var movies: [MovieModel] = []
+    var movies: [MovieCellData] = []
     var collectionView: UICollectionView!
     var flowLayout = UICollectionViewFlowLayout()
     let cellName = "ImageCell"
@@ -30,7 +29,7 @@ class CollectionCell: UITableViewCell {
     }
     
     
-    func setCellData(movies: [MovieModel], router: AppRouter) {
+    func setCellData(movies: [MovieCellData], router: AppRouter) {
         self.movies = movies
         self.router = router
     }
@@ -89,7 +88,6 @@ extension CollectionCell: UICollectionViewDataSource, UICollectionViewDelegate {
 
 extension CollectionCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Return the desired size for each item
         return CGSize(width: 125, height: collectionView.bounds.height)
     }
 }

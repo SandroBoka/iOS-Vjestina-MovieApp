@@ -8,13 +8,21 @@
 import UIKit
 import PureLayout
 import Foundation
-import MovieAppData
+import Combine
 
 class MovieCategoriesViewController: UIViewController {
     
+    enum SectionTitle: String {
+        case whatsPopular = "What's Popular"
+        case freeToWatch = "Free To Watch"
+        case trending = "Trending"
+    }
+    
     var tableView = UITableView()
-    var data: [[MovieModel]] = []
+    var movieData: [[MovieCellData]] = []
+    private var disposables = Set<AnyCancellable>()
     let cellName = "CollectionCell"
+    private var categoriesViewModel = CategoriesViewModel()
     
     private var router: AppRouter!
     
@@ -26,12 +34,21 @@ class MovieCategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        data.append(MovieUseCase().popularMovies)
-        data.append(MovieUseCase().freeToWatchMovies)
-        data.append(MovieUseCase().trendingMovies)
+        self.movieData = categoriesViewModel.moviesPublished
+        
+        categoriesViewModel
+            .$moviesPublished
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] movies in
+                guard let self else { return }
+
+                self.movieData = movies
+//                self.tableView.reloadData()
+            }
+            .store(in: &disposables)
+        
         
         view.backgroundColor = .white
-        
         configureTableView()
     }
     
@@ -57,7 +74,7 @@ class MovieCategoriesViewController: UIViewController {
 extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return movieData.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +85,7 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellName) as? CollectionCell else {
             return UITableViewCell()
         }
-        let movies = data[indexPath.section]
+        let movies = movieData[indexPath.section]
         cell.setCellData(movies: movies, router: router)
         return cell
     }
@@ -80,11 +97,11 @@ extension MovieCategoriesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "What's Popular"
+            return SectionTitle.whatsPopular.rawValue
         case 1:
-            return "Free To Watch"
+            return SectionTitle.freeToWatch.rawValue
         case 2:
-            return "Trending"
+            return SectionTitle.trending.rawValue
         default:
             return nil
         }

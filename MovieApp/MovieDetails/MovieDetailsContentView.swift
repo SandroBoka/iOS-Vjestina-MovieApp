@@ -49,9 +49,6 @@ class MovieDetailsContentView: UIView {
         movieSummary.autoPinEdge(.top, to: .top, of: overviewLabel, withOffset: 40)
         movieSummary.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -20)
         movieSummary.autoPinEdge(.bottom, to: .bottom, of: self)
-        
-        self.layoutIfNeeded()
-        
     }
     
     func startAnimation() {

@@ -7,16 +7,18 @@
 
 import Foundation
 import UIKit
-import MovieAppData
 import PureLayout
+import Combine
 
 class MovieListViewController: UIViewController {
     
     var tableView = UITableView()
-    var movies: [MovieModel] = []
+    var movies: [Movie] = []
     let cellName = "MovieCell"
     
     private var router: AppRouter!
+    private var listViewModel = ListViewModel()
+    private var disposables = Set<AnyCancellable>()
     
     convenience init(router: AppRouter) {
         self.init()
@@ -26,7 +28,17 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        movies = MovieUseCase().allMovies
+        movies = listViewModel.moviesPublished
+        listViewModel
+            .$moviesPublished
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] movies in
+                guard let self else { return }
+
+                self.movies = movies
+                self.tableView.reloadData()
+            }
+            .store(in: &disposables)
         view.backgroundColor = .white
         navigationItem.title = "Movie List"
         configureTableView()
