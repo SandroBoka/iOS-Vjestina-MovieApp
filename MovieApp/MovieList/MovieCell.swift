@@ -45,13 +45,23 @@ class MovieCell: UITableViewCell {
         self.router = router
         movieId = movie.id
         
-        self.movieImageView.kf.setImage(with: URL(string:movie.imageUrl))
+        //        self.movieImageView.kf.setImage(with: URL(string:movie.imageUrl))
+        
+        movieImageView.kf.setImage(with: URL(string: movie.imageUrl), placeholder: nil, options: nil, completionHandler: { result in
+            switch result {
+            case .success:
+                break
+            case .failure:
+                self.movieImageView.image = UIImage(named: "no-image-available")
+            }
+        })
+        
         
         let year = movie.year
         titleLabel.text = movie.name + " (" + String(year) + ")"
         summaryLabel.text = movie.summary
     }
-
+    
     
     
     private func configureImageView() {

@@ -32,7 +32,14 @@ class ImageCell: UICollectionViewCell {
     
     func setImageCellData(movieModel: MovieCellData) {
         self.movieId = movieModel.id
-        self.imageView.kf.setImage(with: movieModel.url)
+        imageView.kf.setImage(with: movieModel.url, placeholder: nil, options: nil, completionHandler: { result in
+            switch result {
+            case .success:
+                break
+            case .failure:
+                self.imageView.image = UIImage(named: "no-image-available")
+            }
+        })
     }
     
     
