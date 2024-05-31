@@ -17,12 +17,13 @@ class ListViewModel {
     
     @Published private(set) var moviesPublished : [Movie] = []
     
-    func getData(){
-        
-        let movieData = MovieUseCase().allMovies
-        for movie in movieData {
-            if let movieDetails = MovieUseCase().getDetails(id: movie.id) {
-                moviesPublished.append(Movie(movieDetails: movieDetails))
+    func getData() {
+        Task{
+            let movieData = MovieUseCase().allMovies
+            for movie in movieData {
+                if let movieDetails = await DetailsUseCase().getDetails(movieId: movie.id) {
+                    moviesPublished.append(Movie(movieDetails: movieDetails))
+                }
             }
         }
     }

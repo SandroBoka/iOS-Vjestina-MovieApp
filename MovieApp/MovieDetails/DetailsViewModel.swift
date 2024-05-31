@@ -18,8 +18,13 @@ class DetailsViewModel {
     @Published private(set) var movie : Movie!
     
     func getData(movieId: Int) {
-        if let movieDetails = MovieUseCase().getDetails(id: movieId) {
-            movie = Movie(movieDetails: movieDetails)
+        movie = Movie()
+        
+        Task {
+            if let detailsResponse = await DetailsUseCase().getDetails(movieId: movieId) {
+                // Update the movie property with the detailsResponse
+                movie = Movie(movieDetails: detailsResponse)
+            }
         }
     }
 }

@@ -37,13 +37,12 @@ class MovieDetailsViewController: UIViewController {
         detailsViewModel
             .$movie
             .receive(on: DispatchQueue.main)
-            .sink { movie in
-
+            .sink { [weak self] movie in
+                guard let self = self, let movie = movie else { return }
                 self.movie = movie
-                self.buildViews(movieStruct: self.movie)
+                buildViews(movieStruct: movie)
             }
             .store(in: &disposables)
-        
         buildViews(movieStruct: self.movie)
         
         navigationItem.title = "Movie Details"
