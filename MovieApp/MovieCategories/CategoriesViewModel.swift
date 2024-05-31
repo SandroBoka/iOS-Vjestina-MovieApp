@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import MovieAppData
 
 
 class CategoriesViewModel {
@@ -20,15 +19,21 @@ class CategoriesViewModel {
     
     func getData(){
         
-        moviesPublished.append(MovieUseCase().popularMovies.map{
-            MovieCellData(movieModel: $0)
-        })
-        
-        moviesPublished.append(MovieUseCase().freeToWatchMovies.map{
-            MovieCellData(movieModel: $0)
-        })
-        moviesPublished.append(MovieUseCase().trendingMovies.map{
-            MovieCellData(movieModel: $0)
-        })
+        Task{
+            let popularResponse = await CategoriesUseCase().popularMovies()
+            moviesPublished.append(popularResponse.map{
+                MovieCellData(movie: $0)
+            })
+            
+            let freeResponse = await CategoriesUseCase().freeToWatchMovies()
+            moviesPublished.append(freeResponse.map{
+                MovieCellData(movie: $0)
+            })
+            
+            let trendingResponse = await CategoriesUseCase().trendingMovies()
+            moviesPublished.append(trendingResponse.map{
+                MovieCellData(movie: $0)
+            })
+        }
     }
 }

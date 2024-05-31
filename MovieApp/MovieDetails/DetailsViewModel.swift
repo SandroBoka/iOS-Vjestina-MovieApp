@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import MovieAppData
 import Combine
 
 class DetailsViewModel {

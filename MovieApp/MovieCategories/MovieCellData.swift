@@ -15,9 +15,9 @@ struct MovieCellData {
     let url: URL
     let name: String
     
-    init(movieModel: MovieModel) {
-        id = movieModel.id
-        url = URL(string: movieModel.imageUrl)!
-        name = movieModel.name
+    init(movie: CategoriesResponse) {
+        id = movie.id
+        url = URL(string: movie.imageUrl)!
+        name = movie.name
     }
 }

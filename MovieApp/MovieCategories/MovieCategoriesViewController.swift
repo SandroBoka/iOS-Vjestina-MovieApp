@@ -18,11 +18,11 @@ class MovieCategoriesViewController: UIViewController {
         case trending = "Trending"
     }
     
+    private var categoriesViewModel = CategoriesViewModel()
     var tableView = UITableView()
     var movieData: [[MovieCellData]] = []
     private var disposables = Set<AnyCancellable>()
     let cellName = "CollectionCell"
-    private var categoriesViewModel = CategoriesViewModel()
     
     private var router: AppRouter!
     
@@ -43,7 +43,7 @@ class MovieCategoriesViewController: UIViewController {
                 guard let self else { return }
 
                 self.movieData = movies
-//                self.tableView.reloadData()
+                self.tableView.reloadData()
             }
             .store(in: &disposables)
         

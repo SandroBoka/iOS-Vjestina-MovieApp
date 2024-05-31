@@ -32,6 +32,7 @@ class CollectionCell: UITableViewCell {
     func setCellData(movies: [MovieCellData], router: AppRouter) {
         self.movies = movies
         self.router = router
+        self.collectionView.reloadData()
     }
     
     
