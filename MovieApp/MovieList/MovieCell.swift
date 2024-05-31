@@ -41,16 +41,15 @@ class MovieCell: UITableViewCell {
     }
     
     
-    func setCellData(movieModel: Movie, router: AppRouter) {
-        let url = movieModel.imageUrl
+    func setCellData(movie: MovieListData, router: AppRouter) {
         self.router = router
-        movieId = movieModel.id
+        movieId = movie.id
         
-        self.movieImageView.kf.setImage(with: url)
+        self.movieImageView.kf.setImage(with: URL(string:movie.imageUrl))
         
-        let year = movieModel.year
-        titleLabel.text = movieModel.name + " (" + String(year) + ")"
-        summaryLabel.text = movieModel.summary
+        let year = movie.year
+        titleLabel.text = movie.name + " (" + String(year) + ")"
+        summaryLabel.text = movie.summary
     }
 
     

@@ -13,7 +13,7 @@ import Combine
 class MovieListViewController: UIViewController {
     
     var tableView = UITableView()
-    var movies: [Movie] = []
+    var movies: [MovieListData] = []
     let cellName = "MovieCell"
     
     private var router: AppRouter!
@@ -83,7 +83,7 @@ extension MovieListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let movie = movies[indexPath.section] // Modified to use indexPath.section
-        cell.setCellData(movieModel: movie, router: router)
+        cell.setCellData(movie: movie, router: router)
         return cell
     }
 

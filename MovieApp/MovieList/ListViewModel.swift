@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import MovieAppData
 
 class ListViewModel {
     
@@ -15,15 +14,14 @@ class ListViewModel {
         getData()
     }
     
-    @Published private(set) var moviesPublished : [Movie] = []
+    @Published private(set) var moviesPublished : [MovieListData] = []
     
     func getData() {
         Task{
-            let movieData = MovieUseCase().allMovies
-            for movie in movieData {
-                if let movieDetails = await DetailsUseCase().getDetails(movieId: movie.id) {
-                    moviesPublished.append(Movie(movieDetails: movieDetails))
-                }
+            let movieData = await ListUseCase().allMovies()
+            
+            moviesPublished = movieData.map {
+                MovieListData(id: $0.id, imageUrl: $0.imageUrl, name: $0.name, summary: $0.summary, year: $0.year)
             }
         }
     }
